@@ -4,12 +4,15 @@
   --deepBlue: #293264;
   --lightBlue: #d6dbf5;
   --whitish: #f5f7fb;
-
 }
 
-body{
+body {
   margin: 0;
-  
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
 }
 
 .start-page {
@@ -42,4 +45,44 @@ body{
   width: 193px;
   height: 52px;
   border: none;
+  cursor: pointer;
+}
+
+.quiz-page {
+  color: var(--deepBlue);
+  text-align: center;
+  margin-top: 40px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.quiz-page h2 {
+  font-family: var(--karla);
+}
+
+.quiz-page .options {
+  display: flex;
+  justify-content: center;
+  gap: 13px;
+  flex-wrap: wrap;
+
+}
+
+.options button {
+  font-family: var(--inter);
+  font-family: 500;
+  font-size: 10.24;
+  border-radius: 7.942px;
+  border: 1px solid #4d5b9e;
+  width: 87px;
+height: 25px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.divider {
+  border-bottom: 2px solid #dbdef0;
+  max-width: 450px;
+  padding-top: 20px;
+  margin: 0 auto;
 }

@@ -7,10 +7,10 @@
   text-align: center;
   width: 100%;
   overflow: hidden;
-
 }
 
-.blog-down {
+
+.start-page .blob-down {
   position: relative;
   margin-top: auto;
   margin-right: auto;
@@ -18,11 +18,12 @@
   top: 0;
 }
 
-.blog-up {
+.start-page .blob-up {
   position: relative;
   margin-bottom: auto;
   margin-left: auto;
   left: 0;
   bottom: 0;
- 
 }
+
+
