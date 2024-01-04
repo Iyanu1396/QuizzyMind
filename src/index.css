@@ -1,0 +1,45 @@
+:root {
+  --karla: "Karla", sans-serif;
+  --inter: "Inter", sans-serif;
+  --deepBlue: #293264;
+  --lightBlue: #d6dbf5;
+  --whitish: #f5f7fb;
+
+}
+
+body{
+  margin: 0;
+  
+}
+
+.start-page {
+  color: var(--deepBlue);
+}
+
+.start-page h1 {
+  font-family: var(--karla);
+  margin: 0;
+  padding-bottom: 7px;
+}
+
+.start-page p,
+.start-btn {
+  font-family: var(--inter);
+}
+
+.start-page p {
+  font-weight: 400;
+  padding-bottom: 29px;
+  font-size: 1.1rem;
+}
+
+.start-btn {
+  font-weight: 500;
+  color: var(--whitish);
+  background-color: var(--deepBlue);
+  font-size: 1rem;
+  border-radius: 15px;
+  width: 193px;
+  height: 52px;
+  border: none;
+}

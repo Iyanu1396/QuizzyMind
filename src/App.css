@@ -1,0 +1,28 @@
+.start-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+
+}
+
+.blog-down {
+  position: relative;
+  margin-top: auto;
+  margin-right: auto;
+  right: 0;
+  top: 0;
+}
+
+.blog-up {
+  position: relative;
+  margin-bottom: auto;
+  margin-left: auto;
+  left: 0;
+  bottom: 0;
+ 
+}
