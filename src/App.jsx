@@ -24,7 +24,7 @@ function App() {
     };
 
     getQuestions();
-  }, [startQuiz]);
+  }, []);
 
   const commenceQuiz = function () {
     setStartQuiz((prevState) => !prevState);
