@@ -74,10 +74,11 @@ body {
   font-size: 10.24;
   border-radius: 7.942px;
   border: 1px solid #4d5b9e;
-  width: 87px;
+
 height: 25px;
   cursor: pointer;
   background-color: transparent;
+  color: var(--deepBlue);
 }
 
 .divider {

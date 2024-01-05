@@ -1,4 +1,4 @@
-function StartPage(props) {
+function StartPage(props ) {
 
   return (
     <div className="start-page">
