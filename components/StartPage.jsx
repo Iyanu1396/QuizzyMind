@@ -1,5 +1,4 @@
-function StartPage(props ) {
-
+function StartPage(props) {
   return (
     <div className="start-page">
       <img className="blob-up" src={props.blobUp} alt="" />
@@ -11,6 +10,7 @@ function StartPage(props ) {
           experience that combines entertainment with valuable insights. Start
           the quiz and unleash your intellect!
         </p>
+
         <button className="start-btn " onClick={() => props.commenceQuiz()}>
           Start Quiz
         </button>

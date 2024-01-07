@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 import blobDown from "./assets/down.svg";
 import blobUp from "./assets/up.svg";
 
@@ -12,7 +10,11 @@ import { nanoid } from "nanoid";
 function App() {
   const [startQuiz, setStartQuiz] = useState(false);
 
-  const [quizzesData, setQuizzesData] = useState([]);
+  const [quizzes, setQuizzes] = useState([]);
+
+  const commenceQuiz = function () {
+    setStartQuiz((prevState) => !prevState);
+  };
 
   useEffect(() => {
     const getQuestions = async function () {
@@ -20,29 +22,22 @@ function App() {
         "https://opentdb.com/api.php?amount=5&type=multiple"
       );
       const data = await res.json();
-      setQuizzesData(data.results);
+      const questions = data.results.map((quiz) => ({
+        question: quiz.question,
+        answers: [...quiz.incorrect_answers, quiz.correct_answer],
+        correctAnswer: quiz.correct_answer,
+        id: nanoid(),
+        isAnswered: false,
+      }));
+      setQuizzes(questions);
     };
 
     getQuestions();
   }, []);
 
-  const commenceQuiz = function () {
-    setStartQuiz((prevState) => !prevState);
-  };
-
-  const questions = quizzesData.map((quiz) => ({
-    question: quiz.question,
-    answers: [...quiz.incorrect_answers, quiz.correct_answer],
-    correctAnswer: quiz.correct_answer,
-    id: nanoid(),
-  }));
-
-  const renderQuestion = questions.map((question) => (
+  const renderQuestion = quizzes.map((question) => (
     <QuizPage key={nanoid()} {...question} />
   ));
-
-  console.log(questions)
-
 
   return (
     <main>
@@ -53,7 +48,7 @@ function App() {
           commenceQuiz={commenceQuiz}
         />
       ) : (
-         renderQuestion 
+        renderQuestion
       )}
     </main>
   );
