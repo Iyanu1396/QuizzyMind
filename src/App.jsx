@@ -18,25 +18,45 @@ function App() {
 
   useEffect(() => {
     const getQuestions = async function () {
-      const res = await fetch(
-        "https://opentdb.com/api.php?amount=5&type=multiple"
-      );
-      const data = await res.json();
-      const questions = data.results.map((quiz) => ({
-        question: quiz.question,
-        answers: [...quiz.incorrect_answers, quiz.correct_answer],
-        correctAnswer: quiz.correct_answer,
-        id: nanoid(),
-        isAnswered: false,
-      }));
-      setQuizzes(questions);
+      try {
+        const res = await fetch(
+          "https://opentdb.com/api.php?amount=5&type=multiple"
+        );
+        const data = await res.json();
+        const questions = data.results.map((quiz) => ({
+          question: quiz.question,
+          answers: [...quiz.incorrect_answers, quiz.correct_answer],
+          correctAnswer: quiz.correct_answer,
+          id: nanoid(),
+          selectedAnswer: null,
+        }));
+        setQuizzes(questions);
+      } catch (err) {
+        console.log(err.message);
+      }
     };
 
     getQuestions();
   }, []);
 
+  const handleSelectedAnswer = function (selectedAnswer, id) {
+    setQuizzes((prevQuizzes) =>
+      prevQuizzes.map((quiz) => {
+        return quiz.id === id
+          ? { ...quiz, selectedAnswer: selectedAnswer }
+          : quiz;
+      })
+    );
+  };
+
+  console.log(quizzes);
+
   const renderQuestion = quizzes.map((question) => (
-    <QuizPage key={nanoid()} {...question} />
+    <QuizPage
+      key={nanoid()}
+      {...question}
+      handleSelectedAnswer={handleSelectedAnswer}
+    />
   ));
 
   return (
@@ -48,7 +68,10 @@ function App() {
           commenceQuiz={commenceQuiz}
         />
       ) : (
-        renderQuestion
+        <>
+          {renderQuestion}
+          <button className="check-btn">Check Answers</button>
+        </>
       )}
     </main>
   );

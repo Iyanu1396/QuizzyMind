@@ -2,28 +2,10 @@ import React, { useState } from "react";
 
 function QuizPage(props) {
   const [answeredIndex, setAnsweredIndex] = useState(null);
+
   const handleClick = function (index) {
     setAnsweredIndex(index);
   };
-
-  // function generateUniqueRandomNumbers(count, maxRange) {
-  //   const uniqueNumbers = new Set();
-
-  //   while (uniqueNumbers.size < count) {
-  //     const randomNumber = Math.floor(Math.random() * (maxRange + 1));
-  //     uniqueNumbers.add(randomNumber);
-  //   }
-
-  //   return Array.from(uniqueNumbers);
-  // }
-
-  // const numberOfUniqueNumbers = 4;
-  // const maxRange = 3;
-
-  // const uniqueRandomNumbers = generateUniqueRandomNumbers(
-  //   numberOfUniqueNumbers,
-  //   maxRange
-  // );
 
   return (
     <div className="quiz-page">
@@ -35,10 +17,10 @@ function QuizPage(props) {
           <button
             key={index}
             style={{
-              backgroundColor: answeredIndex === index ? "#D6DBF5" : "",
+              backgroundColor: props.selectedAnswer === answer ? "#D6DBF5" : "",
             }}
             className={`option ${index + 1}`}
-            onClick={() => handleClick(index)}
+            onClick={() => props.handleSelectedAnswer(answer, props.id)}
           >
             {answer}
           </button>
