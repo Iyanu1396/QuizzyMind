@@ -1,11 +1,10 @@
 import React, { useState } from "react";
+import he from "he";
 
 function QuizPage(props) {
   return (
     <div className="quiz-page">
-      <h2 className="question">
-        {props.question.replace(/&quot;/g, '"').replace(/&#039;/g, "'")}
-      </h2>
+      <h2 className="question">{he.decode(props.question)}</h2>
       <div className="options">
         {props.answers.map((answer, index) => (
           <button
@@ -26,9 +25,13 @@ function QuizPage(props) {
             } 
             ${props.selectedAnswer === answer ? "selected" : ""}
             `}
-            onClick={() => props.handleSelectedAnswer(answer, props.id)}
+            onClick={
+              !props.submitQuizzes
+                ? () => props.handleSelectedAnswer(answer, props.id)
+                : null
+            }
           >
-            {answer}
+            {he.decode(answer)}
           </button>
         ))}
       </div>

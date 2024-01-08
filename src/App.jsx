@@ -6,11 +6,14 @@ import "./App.css";
 import StartPage from "../components/StartPage";
 import QuizPage from "../components/QuizPage";
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 
 function App() {
   const [startQuiz, setStartQuiz] = useState(false);
 
   const [quizzes, setQuizzes] = useState([]);
+  const [submitQuizzes, setSubmitQuizzes] = useState(false);
+  const [restartQuizzes, setRestartQuizzes] = useState(false);
 
   const commenceQuiz = function () {
     setStartQuiz((prevState) => !prevState);
@@ -39,7 +42,7 @@ function App() {
     };
 
     getQuestions();
-  }, []);
+  }, [restartQuizzes]);
 
   const handleSelectedAnswer = function (selectedAnswer, id) {
     setQuizzes((prevQuizzes) =>
@@ -52,6 +55,7 @@ function App() {
   };
 
   const handleSubmittedAnswers = function () {
+    setSubmitQuizzes((prev) => !prev);
     setQuizzes((prevQuizzes) =>
       prevQuizzes.map((quiz) => {
         return quiz.selectedAnswer === quiz.correctAnswer
@@ -61,15 +65,31 @@ function App() {
     );
   };
 
-  console.log(quizzes);
-
   const renderQuestion = quizzes.map((question) => (
     <QuizPage
       key={nanoid()}
       {...question}
       handleSelectedAnswer={handleSelectedAnswer}
+      submitQuizzes={submitQuizzes}
     />
   ));
+
+  function restartQuiz() {
+    setRestartQuizzes((prevQuizzes) => !prevQuizzes);
+    setSubmitQuizzes((prev) => !prev);
+  }
+
+  function countCorrectAns(quizzesArray) {
+    let correctCount = 0;
+    quizzesArray.forEach((quiz) => {
+      if (quiz.isCorrect) {
+        correctCount++;
+      }
+    });
+    return correctCount;
+  }
+
+  const numberOfCorrectAnswers = countCorrectAns(quizzes);
 
   return (
     <main>
@@ -81,10 +101,23 @@ function App() {
         />
       ) : (
         <>
+          {numberOfCorrectAnswers >= 3 && <Confetti />}
           {renderQuestion}
-          <button onClick={handleSubmittedAnswers} className="check-btn">
-            Check Answers
-          </button>
+          {submitQuizzes ? (
+            <div className="flex">
+              <p>
+                You scored {numberOfCorrectAnswers}/{quizzes.length} correct
+                answers
+              </p>{" "}
+              <button onClick={restartQuiz} className="play-btn">
+                Play again
+              </button>
+            </div>
+          ) : (
+            <button onClick={handleSubmittedAnswers} className="check-btn">
+              Check Answers
+            </button>
+          )}
         </>
       )}
     </main>

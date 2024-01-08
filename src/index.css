@@ -8,6 +8,9 @@
 
 body {
   margin: 0;
+  background-image: url("/public/up.svg"), url("/public/down.svg");
+  background-position: top right, bottom left;
+  background-repeat: no-repeat;
 }
 
 .container {
@@ -57,6 +60,7 @@ button {
   margin-top: 40px;
   width: 90%;
   margin: 0 auto;
+  padding: 1em 0;
 }
 
 .quiz-page h2 {
@@ -76,7 +80,7 @@ button {
   font-size: 10.24;
   border-radius: 7.942px;
   border: 1px solid #4d5b9e;
-
+  font-weight: 500;
   height: 25px;
   cursor: pointer;
   background-color: transparent;
@@ -92,17 +96,18 @@ button {
 
 .check-btn {
   display: block;
+  margin: 0 auto;
   color: #f5f7fb;
   margin: 0 auto;
   font-family: var(--inter);
   font-size: 10.24px;
-  background-color: var(--deepBlue);
+  background-color: #4d5b9e;
   font-weight: 600;
-  margin-top: 20px;
   width: 120px;
   height: 35px;
   border-radius: 15px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 button.selected {
@@ -115,4 +120,29 @@ button.wrong {
 
 button.correct {
   background-color: #94d7a2;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  margin: 20px 0;
+}
+
+.flex p {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--inter);
+}
+
+.play-btn {
+  color: #f5f7fb;
+  font-family: var(--inter);
+  font-size: 10.24px;
+  background-color: #4d5b9e;
+  font-weight: 600;
+  width: 120px;
+  height: 35px;
+  border-radius: 15px;
 }
