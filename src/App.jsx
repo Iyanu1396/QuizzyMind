@@ -29,6 +29,8 @@ function App() {
           correctAnswer: quiz.correct_answer,
           id: nanoid(),
           selectedAnswer: null,
+          isCorrect: null,
+          isAnswered: false,
         }));
         setQuizzes(questions);
       } catch (err) {
@@ -45,6 +47,16 @@ function App() {
         return quiz.id === id
           ? { ...quiz, selectedAnswer: selectedAnswer }
           : quiz;
+      })
+    );
+  };
+
+  const handleSubmittedAnswers = function () {
+    setQuizzes((prevQuizzes) =>
+      prevQuizzes.map((quiz) => {
+        return quiz.selectedAnswer === quiz.correctAnswer
+          ? { ...quiz, isAnswered: true, isCorrect: true }
+          : { ...quiz, isAnswered: true, isCorrect: false };
       })
     );
   };
@@ -70,7 +82,9 @@ function App() {
       ) : (
         <>
           {renderQuestion}
-          <button className="check-btn">Check Answers</button>
+          <button onClick={handleSubmittedAnswers} className="check-btn">
+            Check Answers
+          </button>
         </>
       )}
     </main>
