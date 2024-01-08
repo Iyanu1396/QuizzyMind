@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 
 function QuizPage(props) {
-  const [answeredIndex, setAnsweredIndex] = useState(null);
-
-  const handleClick = function (index) {
-    setAnsweredIndex(index);
-  };
-
   return (
     <div className="quiz-page">
       <h2 className="question">
@@ -16,10 +10,22 @@ function QuizPage(props) {
         {props.answers.map((answer, index) => (
           <button
             key={index}
-            style={{
-              backgroundColor: props.selectedAnswer === answer ? "#D6DBF5" : "",
-            }}
-            className={`option ${index + 1}`}
+            className={`option${index + 1} 
+              
+              ${
+                props.selectedAnswer === answer &&
+                props.selectedAnswer !== props.correctAnswer &&
+                props.isCorrect === false
+                  ? "wrong"
+                  : ""
+              } 
+            ${
+              props.correctAnswer === answer && props.isAnswered
+                ? "correct"
+                : ""
+            } 
+            ${props.selectedAnswer === answer ? "selected" : ""}
+            `}
             onClick={() => props.handleSelectedAnswer(answer, props.id)}
           >
             {answer}
