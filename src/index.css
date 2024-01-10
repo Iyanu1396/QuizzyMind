@@ -126,6 +126,7 @@ button.correct {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1em;
   margin: 20px 0;
 }
