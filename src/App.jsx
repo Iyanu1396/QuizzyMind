@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import blobDown from "./assets/down.svg";
-import blobUp from "./assets/up.svg";
 
 import "./App.css";
 import StartPage from "../components/StartPage";
 import QuizPage from "../components/QuizPage";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
+import arrayShuffle from "array-shuffle";
 
 function App() {
   const [startQuiz, setStartQuiz] = useState(false);
@@ -28,7 +27,10 @@ function App() {
         const data = await res.json();
         const questions = data.results.map((quiz) => ({
           question: quiz.question,
-          answers: [...quiz.incorrect_answers, quiz.correct_answer],
+          answers: arrayShuffle([
+            ...quiz.incorrect_answers,
+            quiz.correct_answer,
+          ]),
           correctAnswer: quiz.correct_answer,
           id: nanoid(),
           selectedAnswer: null,
@@ -37,7 +39,9 @@ function App() {
         }));
         setQuizzes(questions);
       } catch (err) {
-        console.log(err.message);
+        alert(
+          "Failed to load,kindly check your internet connection and try again"
+        );
       }
     };
 
@@ -94,11 +98,7 @@ function App() {
   return (
     <main>
       {!startQuiz ? (
-        <StartPage
-          blobUp={blobUp}
-          blobDown={blobDown}
-          commenceQuiz={commenceQuiz}
-        />
+        <StartPage commenceQuiz={commenceQuiz} />
       ) : (
         <>
           {numberOfCorrectAnswers >= 3 && <Confetti />}
